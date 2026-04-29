@@ -759,6 +759,201 @@
     transition: opacity 0.7s ease, transform 0.7s ease;
   }
   .reveal.visible { opacity: 1; transform: none; }
+
+  /* Responsive adjustments */
+  @media (max-width: 1100px) {
+    nav {
+      padding: 18px 24px;
+      gap: 16px;
+    }
+    .nav-links {
+      gap: 20px;
+    }
+    .hero,
+    section,
+    .divider,
+    .markets-section,
+    .contact-section,
+    footer {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    .hero {
+      padding-bottom: 64px;
+    }
+    .about-grid,
+    .markets-inner,
+    #experience > div[style*="grid-template-columns"] {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+    .project-card.featured {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+    }
+    .project-card.featured .project-visual {
+      flex-basis: auto;
+      width: 100%;
+    }
+    .certs-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    body {
+      cursor: auto;
+    }
+    .cursor,
+    .cursor-ring {
+      display: none;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      padding: 14px 18px;
+      backdrop-filter: blur(10px);
+      flex-wrap: wrap;
+      row-gap: 10px;
+    }
+    .nav-logo,
+    .nav-status {
+      flex: 1 1 auto;
+    }
+    .nav-status {
+      justify-content: flex-end;
+      text-align: right;
+    }
+    .nav-links {
+      order: 3;
+      width: 100%;
+      justify-content: space-between;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+    }
+    .nav-links::-webkit-scrollbar {
+      display: none;
+    }
+    .nav-links a {
+      white-space: nowrap;
+    }
+    .hero {
+      min-height: auto;
+      padding-top: 120px;
+      padding-bottom: 56px;
+    }
+    .hero-index,
+    .hero-year,
+    .hero-scroll,
+    .hero-bg-text {
+      display: none;
+    }
+    .hero-name {
+      font-size: clamp(40px, 12vw, 72px);
+      letter-spacing: -2px;
+    }
+    .hero-actions {
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .about-stats,
+    .certs-grid {
+      grid-template-columns: 1fr;
+    }
+    .timeline {
+      padding-left: 28px;
+    }
+    .timeline-dot {
+      left: -32px;
+    }
+    .timeline-header {
+      gap: 8px;
+    }
+    .timeline-period {
+      margin-left: 0;
+    }
+    .contact-links {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .contact-link {
+      justify-content: center;
+      width: 100%;
+    }
+    footer {
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 480px) {
+    nav,
+    .hero,
+    section,
+    .markets-section,
+    .contact-section,
+    footer,
+    .divider {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+    nav {
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
+    .nav-logo {
+      font-size: 16px;
+    }
+    .nav-status {
+      font-size: 10px;
+      gap: 6px;
+    }
+    .hero-content,
+    section {
+      width: 100%;
+    }
+    .hero-name {
+      font-size: 34px;
+    }
+    .hero-desc,
+    .section-sub,
+    .about-left p,
+    .project-desc,
+    .timeline-desc,
+    .contact-desc,
+    .market-quote {
+      font-size: 12px;
+    }
+    .project-card {
+      padding: 22px;
+    }
+    .project-card.featured .project-visual {
+      height: 150px;
+    }
+    .project-title,
+    .timeline-role,
+    .contact-title {
+      letter-spacing: -0.5px;
+    }
+    .contact-title {
+      font-size: clamp(40px, 16vw, 64px);
+    }
+    .market-chip {
+      padding: 10px 14px;
+      border-radius: 20px;
+      white-space: normal;
+    }
+    .about-stats {
+      gap: 12px;
+    }
+  }
 </style>
 </head>
 <body>
@@ -1153,22 +1348,28 @@
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursor-ring');
   let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cursor.style.left = mx + 'px';
-    cursor.style.top = my + 'px';
-  });
-  (function animRing() {
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
-    ring.style.left = rx + 'px';
-    ring.style.top = ry + 'px';
-    requestAnimationFrame(animRing);
-  })();
-  document.querySelectorAll('a, button, .project-card, .stat-card, .cert-card, .market-chip').forEach(el => {
-    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-  });
+  const finePointer = window.matchMedia('(pointer: fine)').matches;
+  if (finePointer) {
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top = my + 'px';
+    });
+    (function animRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px';
+      ring.style.top = ry + 'px';
+      requestAnimationFrame(animRing);
+    })();
+    document.querySelectorAll('a, button, .project-card, .stat-card, .cert-card, .market-chip').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+  } else {
+    cursor.remove();
+    ring.remove();
+  }
 
   // Scroll reveal
   const reveals = document.querySelectorAll('.reveal, .timeline-item');
