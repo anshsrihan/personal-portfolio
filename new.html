@@ -1,293 +1,927 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Shaashvat | Data and ML for markets</title>
-<meta name="description" content="Computer Science graduate building data and ML tools for financial markets. Open to quant, fintech and software roles." />
-<meta property="og:title" content="Shaashvat | Data and ML for markets" />
-<meta property="og:description" content="Data and ML tools for financial markets. Open to quant, fintech and software roles." />
-<meta property="og:type" content="website" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ccircle cx=%2750%27 cy=%2750%27 r=%2744%27 fill=%27%23f2b92f%27 stroke=%27%231b1a17%27 stroke-width=%278%27/%3E%3C/svg%3E" />
-<meta name="theme-color" content="#f3eee3" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Figtree:wght@400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet" />
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --paper: #f3eee3; --ink: #1b1a17; --muted: #6a665c;
-    --gold: #f2b92f; --green: #1f7a4d; --lilac: #cfd6ff; --mint: #cfe8d8; --blush: #f6cdc4; --white: #fffdf7;
-    --display: 'Bricolage Grotesque', system-ui, sans-serif;
-    --body: 'Figtree', system-ui, sans-serif;
-    --hand: 'Caveat', cursive;
-    --line: 2px solid var(--ink);
-  }
-  html { scroll-behavior: smooth; }
-  body { background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 18px; line-height: 1.6; -webkit-font-smoothing: antialiased; padding-bottom: env(safe-area-inset-bottom); }
-  a { color: inherit; }
-  :focus-visible { outline: 3px solid var(--green); outline-offset: 3px; border-radius: 6px; }
-  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Shaashvat | Data and ML for markets</title>
+  <meta name="description"
+    content="Computer Science graduate building data and ML tools for financial markets. Open to quant, fintech and software roles." />
+  <meta property="og:title" content="Shaashvat | Data and ML for markets" />
+  <meta property="og:description"
+    content="Data and ML tools for financial markets. Open to quant, fintech and software roles." />
+  <meta property="og:type" content="website" />
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ccircle cx=%2750%27 cy=%2750%27 r=%2744%27 fill=%27%23f2b92f%27 stroke=%27%231b1a17%27 stroke-width=%278%27/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#f3eee3" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Figtree:wght@400;500;600&family=Caveat:wght@600&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  /* Floating nav */
-  .nav { position: fixed; top: calc(14px + env(safe-area-inset-top)); left: 50%; transform: translateX(-50%); z-index: 20; display: flex; align-items: center; gap: 22px; background: var(--white); border: var(--line); border-radius: 999px; padding: 8px 10px 8px 20px; font-size: 15px; font-weight: 500; box-shadow: 3px 3px 0 var(--ink); white-space: nowrap; }
-  .clock { font-variant-numeric: tabular-nums; color: var(--muted); }
-  .nav a { text-decoration: none; }
-  .nav .links { display: flex; gap: 6px; }
-  .nav .links a { padding: 6px 14px; border-radius: 999px; transition: background .15s; }
-  .nav .links a:hover { background: var(--gold); }
+    :root {
+      --paper: #f3eee3;
+      --ink: #1b1a17;
+      --muted: #6a665c;
+      --gold: #f2b92f;
+      --green: #1f7a4d;
+      --lilac: #cfd6ff;
+      --mint: #cfe8d8;
+      --blush: #f6cdc4;
+      --white: #fffdf7;
+      --display: 'Bricolage Grotesque', system-ui, sans-serif;
+      --body: 'Figtree', system-ui, sans-serif;
+      --hand: 'Caveat', cursive;
+      --line: 2px solid var(--ink);
+    }
 
-  /* Hero */
-  .hero { padding: 150px 0 70px; position: relative; }
-  .hi { font-family: var(--display); font-weight: 600; font-size: 22px; margin-bottom: 14px; }
-  .hero h1 { font-family: var(--display); font-weight: 800; font-size: clamp(46px, 8.6vw, 124px); line-height: 1; letter-spacing: -.035em; max-width: 11.5em; }
-  .sticker { display: inline-flex; align-items: center; justify-content: center; vertical-align: middle; border: var(--line); transition: transform .35s cubic-bezier(.3,1.6,.5,1); }
-  .pill { width: 1.7em; height: .72em; border-radius: 999px; background: var(--green); margin: 0 .08em; transform: rotate(-4deg); }
-  .pill svg { width: 78%; height: 62%; }
-  .pill:hover { transform: rotate(3deg) scale(1.08); }
-  .coin { width: .78em; height: .78em; border-radius: 50%; background: var(--gold); font-size: inherit; margin: 0 .06em; box-shadow: 3px 3px 0 var(--ink); }
-  .coin::before { content: '₹'; font-size: .5em; font-weight: 800; line-height: 1; }
-  .coin:hover { transform: rotateY(180deg) rotate(10deg); }
-  .chips { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 10px; }
-  .chip { display: inline-flex; align-items: center; gap: 9px; background: var(--white); border: var(--line); border-radius: 999px; padding: 7px 16px; font-size: 15px; font-weight: 500; }
-  .chip i { width: 9px; height: 9px; border-radius: 50%; background: var(--green); }
-  .note { position: absolute; right: 24px; bottom: 80px; width: 230px; background: var(--gold); border: var(--line); padding: 16px 18px 20px; transform: rotate(4deg); box-shadow: 5px 5px 0 var(--ink); font-family: var(--hand); font-size: 25px; line-height: 1.1; }
-  .note small { display: block; font-family: var(--body); font-size: 12px; font-weight: 600; letter-spacing: .02em; margin-bottom: 8px; }
+    html {
+      scroll-behavior: smooth;
+    }
 
-  /* Section heads */
-  section { padding: 70px 0 20px; }
-  .h2 { font-family: var(--display); font-weight: 800; font-size: clamp(38px, 6vw, 76px); line-height: 1; letter-spacing: -.03em; margin-bottom: 14px; }
-  .sub { color: var(--muted); max-width: 46ch; margin-bottom: 36px; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--body);
+      font-size: 18px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: env(safe-area-inset-bottom);
+    }
 
-  /* About */
-  .about { display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: start; }
-  .about p { max-width: 54ch; font-size: 20px; }
-  .about p + p { margin-top: 1em; }
-  .tools { display: flex; flex-wrap: wrap; gap: 8px; align-content: flex-start; }
-  .tools span { background: var(--white); border: var(--line); border-radius: 10px; padding: 3px 12px; font-size: 15px; font-weight: 500; }
-  .tools span:nth-child(3n) { background: var(--lilac); }
-  .tools span:nth-child(3n+1) { background: var(--mint); }
-  .tools span:nth-child(5n) { background: var(--blush); }
+    a {
+      color: inherit;
+    }
 
-  /* Work cards */
-  .grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; }
-  .card { grid-column: span 2; background: var(--white); border: var(--line); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 10px; min-height: 280px; box-shadow: 6px 6px 0 var(--ink); transition: transform .2s, box-shadow .2s; }
-  .card:hover { transform: translate(-2px,-4px) rotate(-.8deg); box-shadow: 9px 10px 0 var(--ink); }
-  .card.wide { grid-column: span 4; }
-  .card.full { grid-column: span 6; min-height: 0; background: transparent; border-style: dashed; box-shadow: none; }
-  .card.full:hover { transform: none; box-shadow: none; }
-  .c1 { background: var(--lilac); } .c2 { background: var(--gold); } .c4 { background: var(--mint); } .c5 { background: var(--blush); }
-  .big { font-family: var(--display); font-weight: 800; font-size: clamp(54px, 6vw, 84px); line-height: .9; letter-spacing: -.04em; }
-  .card h3 { font-family: var(--display); font-weight: 700; font-size: 26px; line-height: 1.12; letter-spacing: -.02em; }
-  .card.wide h3 { font-size: clamp(28px, 3.4vw, 42px); max-width: 16em; }
-  .card p { font-size: 16px; line-height: 1.5; max-width: 52ch; }
-  .tags { margin-top: auto; padding-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; }
-  .tags span { border: var(--line); border-radius: 999px; padding: 1px 12px; font-size: 13px; font-weight: 600; background: rgba(255,255,255,.55); }
+    :focus-visible {
+      outline: 3px solid var(--green);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
 
-  /* Experience */
-  .jobs { display: grid; gap: 16px; }
-  .job { display: grid; grid-template-columns: 170px 1fr auto; gap: 8px 28px; align-items: baseline; background: var(--white); border: var(--line); border-radius: 20px; padding: 22px 26px; }
-  .job .when { font-weight: 600; color: var(--muted); }
-  .job h3 { font-family: var(--display); font-weight: 700; font-size: 26px; letter-spacing: -.02em; }
-  .job p { color: var(--muted); font-size: 16px; grid-column: 2 / -1; max-width: 56ch; }
-  .live { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; background: var(--mint); border: var(--line); border-radius: 999px; padding: 2px 12px; }
-  .live i { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+    .wrap {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
 
-  /* Watching notes */
-  .notes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-  .sticky { padding: 22px 22px 26px; border: var(--line); box-shadow: 5px 5px 0 var(--ink); transition: transform .2s; }
-  .sticky:nth-child(1) { background: var(--gold); transform: rotate(-2deg); }
-  .sticky:nth-child(2) { background: var(--mint); transform: rotate(1.5deg); }
-  .sticky:nth-child(3) { background: var(--lilac); transform: rotate(-1deg); }
-  .sticky:hover { transform: rotate(0) translateY(-4px); }
-  .sticky h3 { font-family: var(--display); font-weight: 700; font-size: 24px; line-height: 1.1; letter-spacing: -.02em; }
-  .sticky p { font-family: var(--hand); font-size: 26px; line-height: 1.1; margin-top: 8px; }
-  .quote { font-family: var(--display); font-weight: 700; font-size: clamp(26px, 3.6vw, 46px); line-height: 1.08; letter-spacing: -.03em; max-width: 18em; margin-top: 56px; }
+    /* Floating nav */
+    .nav {
+      position: fixed;
+      top: calc(14px + env(safe-area-inset-top));
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      background: var(--white);
+      border: var(--line);
+      border-radius: 999px;
+      padding: 8px 10px 8px 20px;
+      font-size: 15px;
+      font-weight: 500;
+      box-shadow: 3px 3px 0 var(--ink);
+      white-space: nowrap;
+    }
 
-  /* Certs */
-  .certs { display: flex; flex-wrap: wrap; gap: 10px; }
-  .certs div { background: var(--white); border: var(--line); border-radius: 16px; padding: 8px 18px; font-weight: 600; line-height: 1.3; }
-  .certs small { display: block; font-size: 13px; font-weight: 500; color: var(--muted); }
+    .clock {
+      font-variant-numeric: tabular-nums;
+      color: var(--muted);
+    }
 
-  /* Contact */
-  .contact { padding: 100px 0 60px; }
-  .contact .h2 { font-size: clamp(56px, 13vw, 190px); line-height: .88; margin-bottom: 28px; }
-  .mail { font-family: var(--display); font-weight: 700; font-size: clamp(22px, 3.6vw, 44px); letter-spacing: -.02em; display: inline-flex; align-items: center; gap: 16px; background: var(--gold); border: var(--line); border-radius: 999px; padding: 10px 14px 10px 28px; box-shadow: 5px 5px 0 var(--ink); cursor: pointer; font-family: var(--display); color: var(--ink); transition: transform .15s, box-shadow .15s; }
-  .mail:hover { transform: translate(-2px,-2px); box-shadow: 7px 7px 0 var(--ink); }
-  .mail:active { transform: translate(3px,3px); box-shadow: 2px 2px 0 var(--ink); }
-  .mail span { font-family: var(--body); font-size: 15px; font-weight: 600; background: var(--ink); color: var(--paper); border-radius: 999px; padding: 6px 16px; min-width: 76px; text-align: center; }
-  .socials { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 10px; }
-  .socials a { text-decoration: none; background: var(--white); border: var(--line); border-radius: 999px; padding: 8px 20px; font-weight: 600; transition: background .15s, transform .15s; }
-  .socials a:hover { background: var(--lilac); transform: rotate(-2deg); }
-  footer { border-top: var(--line); padding: 22px 0 36px; font-size: 14px; color: var(--muted); }
+    .nav a {
+      text-decoration: none;
+    }
 
-  @media (max-width: 860px) {
-    body { font-size: 17px; }
-    .wrap { padding: 0 18px; }
-    .nav { gap: 10px; padding-left: 14px; font-size: 14px; }
-    .clock { display: none; }
-    .hero { padding-top: 110px; }
-    .note { position: relative; right: auto; bottom: auto; margin: 40px 0 0 auto; width: 210px; }
-    .about { grid-template-columns: 1fr; gap: 28px; }
-    .grid { grid-template-columns: 1fr; }
-    .card, .card.wide, .card.full { grid-column: auto; min-height: 0; }
-    .job { grid-template-columns: 1fr; }
-    .job p { grid-column: auto; }
-    .notes { grid-template-columns: 1fr; }
-  }
+    .nav .links {
+      display: flex;
+      gap: 6px;
+    }
 
-  .dry { margin-top: 26px; max-width: 34ch; font-size: clamp(19px, 2.2vw, 24px); line-height: 1.35; color: var(--muted); }
-  .quests { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 30px; }
-  .quest { border: var(--line); border-radius: 18px; padding: 18px 20px; background: var(--white); }
-  .quest h3 { font-family: var(--display); font-weight: 700; font-size: 21px; letter-spacing: -.02em; line-height: 1.15; }
-  .quest p { font-size: 15px; line-height: 1.5; color: var(--muted); margin-top: 6px; }
-  .certline { margin-top: 26px; color: var(--muted); font-size: 16px; max-width: 60ch; }
-  @media (max-width: 860px) { .quests { grid-template-columns: 1fr; } }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
-</style>
+    .nav .links a {
+      padding: 6px 14px;
+      border-radius: 999px;
+      transition: background .15s;
+    }
+
+    .nav .links a:hover {
+      background: var(--gold);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 150px 0 70px;
+      position: relative;
+    }
+
+    .hi {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(46px, 8.6vw, 124px);
+      line-height: 1;
+      letter-spacing: -.035em;
+      max-width: 11.5em;
+    }
+
+    .sticker {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      vertical-align: middle;
+      border: var(--line);
+      transition: transform .35s cubic-bezier(.3, 1.6, .5, 1);
+    }
+
+    .pill {
+      width: 1.7em;
+      height: .72em;
+      border-radius: 999px;
+      background: var(--green);
+      margin: 0 .08em;
+      transform: rotate(-4deg);
+    }
+
+    .pill svg {
+      width: 78%;
+      height: 62%;
+    }
+
+    .pill:hover {
+      transform: rotate(3deg) scale(1.08);
+    }
+
+    .coin {
+      width: .78em;
+      height: .78em;
+      border-radius: 50%;
+      background: var(--gold);
+      font-size: inherit;
+      margin: 0 .06em;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    .coin::before {
+      content: '₹';
+      font-size: .5em;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .coin:hover {
+      transform: rotateY(180deg) rotate(10deg);
+    }
+
+    .chips {
+      margin-top: 34px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--white);
+      border: var(--line);
+      border-radius: 999px;
+      padding: 7px 16px;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .chip i {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    .note {
+      position: absolute;
+      right: 24px;
+      bottom: 80px;
+      width: 230px;
+      background: var(--gold);
+      border: var(--line);
+      padding: 16px 18px 20px;
+      transform: rotate(4deg);
+      box-shadow: 5px 5px 0 var(--ink);
+      font-family: var(--hand);
+      font-size: 25px;
+      line-height: 1.1;
+    }
+
+    .note small {
+      display: block;
+      font-family: var(--body);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .02em;
+      margin-bottom: 8px;
+    }
+
+    /* Section heads */
+    section {
+      padding: 70px 0 20px;
+    }
+
+    .h2 {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(38px, 6vw, 76px);
+      line-height: 1;
+      letter-spacing: -.03em;
+      margin-bottom: 14px;
+    }
+
+    .sub {
+      color: var(--muted);
+      max-width: 46ch;
+      margin-bottom: 36px;
+    }
+
+    /* About */
+    .about {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    .about p {
+      max-width: 54ch;
+      font-size: 20px;
+    }
+
+    .about p+p {
+      margin-top: 1em;
+    }
+
+    .tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-content: flex-start;
+    }
+
+    .tools span {
+      background: var(--white);
+      border: var(--line);
+      border-radius: 10px;
+      padding: 3px 12px;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .tools span:nth-child(3n) {
+      background: var(--lilac);
+    }
+
+    .tools span:nth-child(3n+1) {
+      background: var(--mint);
+    }
+
+    .tools span:nth-child(5n) {
+      background: var(--blush);
+    }
+
+    /* Work cards */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      grid-column: span 2;
+      background: var(--white);
+      border: var(--line);
+      border-radius: 24px;
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 280px;
+      box-shadow: 6px 6px 0 var(--ink);
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .card:hover {
+      transform: translate(-2px, -4px) rotate(-.8deg);
+      box-shadow: 9px 10px 0 var(--ink);
+    }
+
+    .card.wide {
+      grid-column: span 4;
+    }
+
+    .card.full {
+      grid-column: span 6;
+      min-height: 0;
+      background: transparent;
+      border-style: dashed;
+      box-shadow: none;
+    }
+
+    .card.full:hover {
+      transform: none;
+      box-shadow: none;
+    }
+
+    .c1 {
+      background: var(--lilac);
+    }
+
+    .c2 {
+      background: var(--gold);
+    }
+
+    .c4 {
+      background: var(--mint);
+    }
+
+    .c5 {
+      background: var(--blush);
+    }
+
+    .big {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(54px, 6vw, 84px);
+      line-height: .9;
+      letter-spacing: -.04em;
+    }
+
+    .card h3 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 26px;
+      line-height: 1.12;
+      letter-spacing: -.02em;
+    }
+
+    .card.wide h3 {
+      font-size: clamp(28px, 3.4vw, 42px);
+      max-width: 16em;
+    }
+
+    .card p {
+      font-size: 16px;
+      line-height: 1.5;
+      max-width: 52ch;
+    }
+
+    .tags {
+      margin-top: auto;
+      padding-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tags span {
+      border: var(--line);
+      border-radius: 999px;
+      padding: 1px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, .55);
+    }
+
+    /* Experience */
+    .jobs {
+      display: grid;
+      gap: 16px;
+    }
+
+    .job {
+      display: grid;
+      grid-template-columns: 170px 1fr auto;
+      gap: 8px 28px;
+      align-items: baseline;
+      background: var(--white);
+      border: var(--line);
+      border-radius: 20px;
+      padding: 22px 26px;
+    }
+
+    .job .when {
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .job h3 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 26px;
+      letter-spacing: -.02em;
+    }
+
+    .job p {
+      color: var(--muted);
+      font-size: 16px;
+      grid-column: 2 / -1;
+      max-width: 56ch;
+    }
+
+    .live {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      background: var(--mint);
+      border: var(--line);
+      border-radius: 999px;
+      padding: 2px 12px;
+    }
+
+    .live i {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    /* Watching notes */
+    .notes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .sticky {
+      padding: 22px 22px 26px;
+      border: var(--line);
+      box-shadow: 5px 5px 0 var(--ink);
+      transition: transform .2s;
+    }
+
+    .sticky:nth-child(1) {
+      background: var(--gold);
+      transform: rotate(-2deg);
+    }
+
+    .sticky:nth-child(2) {
+      background: var(--mint);
+      transform: rotate(1.5deg);
+    }
+
+    .sticky:nth-child(3) {
+      background: var(--lilac);
+      transform: rotate(-1deg);
+    }
+
+    .sticky:hover {
+      transform: rotate(0) translateY(-4px);
+    }
+
+    .sticky h3 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 1.1;
+      letter-spacing: -.02em;
+    }
+
+    .sticky p {
+      font-family: var(--hand);
+      font-size: 26px;
+      line-height: 1.1;
+      margin-top: 8px;
+    }
+
+    .quote {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(26px, 3.6vw, 46px);
+      line-height: 1.08;
+      letter-spacing: -.03em;
+      max-width: 18em;
+      margin-top: 56px;
+    }
+
+    /* Certs */
+    .certs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .certs div {
+      background: var(--white);
+      border: var(--line);
+      border-radius: 16px;
+      padding: 8px 18px;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .certs small {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    /* Contact */
+    .contact {
+      padding: 100px 0 60px;
+    }
+
+    .contact .h2 {
+      font-size: clamp(56px, 13vw, 190px);
+      line-height: .88;
+      margin-bottom: 28px;
+    }
+
+    .mail {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(22px, 3.6vw, 44px);
+      letter-spacing: -.02em;
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--gold);
+      border: var(--line);
+      border-radius: 999px;
+      padding: 10px 14px 10px 28px;
+      box-shadow: 5px 5px 0 var(--ink);
+      cursor: pointer;
+      font-family: var(--display);
+      color: var(--ink);
+      transition: transform .15s, box-shadow .15s;
+    }
+
+    .mail:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 7px 7px 0 var(--ink);
+    }
+
+    .mail:active {
+      transform: translate(3px, 3px);
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+
+    .mail span {
+      font-family: var(--body);
+      font-size: 15px;
+      font-weight: 600;
+      background: var(--ink);
+      color: var(--paper);
+      border-radius: 999px;
+      padding: 6px 16px;
+      min-width: 76px;
+      text-align: center;
+    }
+
+    .socials {
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .socials a {
+      text-decoration: none;
+      background: var(--white);
+      border: var(--line);
+      border-radius: 999px;
+      padding: 8px 20px;
+      font-weight: 600;
+      transition: background .15s, transform .15s;
+    }
+
+    .socials a:hover {
+      background: var(--lilac);
+      transform: rotate(-2deg);
+    }
+
+    footer {
+      border-top: var(--line);
+      padding: 22px 0 36px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 860px) {
+      body {
+        font-size: 17px;
+      }
+
+      .wrap {
+        padding: 0 18px;
+      }
+
+      .nav {
+        gap: 10px;
+        padding-left: 14px;
+        font-size: 14px;
+      }
+
+      .clock {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 110px;
+      }
+
+      .note {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        margin: 40px 0 0 auto;
+        width: 210px;
+      }
+
+      .about {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card,
+      .card.wide,
+      .card.full {
+        grid-column: auto;
+        min-height: 0;
+      }
+
+      .job {
+        grid-template-columns: 1fr;
+      }
+
+      .job p {
+        grid-column: auto;
+      }
+
+      .notes {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .dry {
+      margin-top: 26px;
+      max-width: 34ch;
+      font-size: clamp(19px, 2.2vw, 24px);
+      line-height: 1.35;
+      color: var(--muted);
+    }
+
+    .quests {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .quest {
+      border: var(--line);
+      border-radius: 18px;
+      padding: 18px 20px;
+      background: var(--white);
+    }
+
+    .quest h3 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 21px;
+      letter-spacing: -.02em;
+      line-height: 1.15;
+    }
+
+    .quest p {
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .certline {
+      margin-top: 26px;
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 60ch;
+    }
+
+    @media (max-width: 860px) {
+      .quests {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<header class="nav">
-  <span class="clock" id="clock" aria-label="Current time in Delhi"></span>
-  <nav class="links" aria-label="Primary">
-    <a href="#work">Work</a>
-    <a href="#experience">Experience</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
+  <header class="nav">
+    <span class="clock" id="clock" aria-label="Current time in Delhi"></span>
+    <nav class="links" aria-label="Primary">
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-<main>
-  <div class="wrap">
-    <div class="hero">
-      <p class="hi">Hey, I'm Shaashvat.</p>
-      <h1>I build data and ML tools for <span class="sticker coin" aria-hidden="true"></span> financial markets <span class="sticker pill" aria-hidden="true"><svg viewBox="0 0 60 28" fill="none" stroke="#fffdf7" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="4,22 18,12 28,18 44,5 56,9"/></svg></span></h1>
-      <p class="dry">…and I report the results that didn't work, too.</p>
-      <div class="chips">
-        <span class="chip"><i></i>Intern at BookYourMeals</span>
-        <span class="chip">CS graduate, SRM, class of 2026</span>
-        <span class="chip">Open to quant, fintech and software roles</span>
+  <main>
+    <div class="wrap">
+      <div class="hero">
+        <p class="hi">Hey, I'm Shaashvat.</p>
+        <h1>I build data and ML tools for <span class="sticker coin" aria-hidden="true"></span> financial markets <span
+            class="sticker pill" aria-hidden="true"><svg viewBox="0 0 60 28" fill="none" stroke="#fffdf7"
+              stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="4,22 18,12 28,18 44,5 56,9" />
+            </svg></span></h1>
+        <p class="dry">…and I report the results that didn't work, too.</p>
+        <div class="chips">
+          <span class="chip"><i></i>Intern at BookYourMeals</span>
+          <span class="chip">CS graduate, SRM, class of 2026</span>
+          <span class="chip">Open to quant, fintech and software roles</span>
+        </div>
+        <aside class="note"><small>Right now</small>Intern by day. Indian-market microstructure ideas by night.</aside>
       </div>
-      <aside class="note"><small>Right now</small>Intern by day. Indian-market microstructure ideas by night.</aside>
+
+      <section id="about">
+        <div class="about">
+          <div>
+            <h2 class="h2">A bit about me</h2>
+            <p>I work where data, markets and software meet. Python and PyTorch for research, Flask, SQL and Next.js for
+              shipping.</p>
+            <p>I manage my own portfolio with a macro lens, and I'd rather understand why something moves than react to
+              it.</p>
+          </div>
+          <div class="tools" aria-label="Tools I use">
+            <span>Python</span><span>SQL</span><span>PyTorch</span><span>scikit-learn</span><span>Pandas</span><span>Flask</span><span>LangChain</span><span>Selenium</span><span>yfinance</span><span>Next.js</span><span>FinBERT</span><span>Supabase</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="work">
+        <h2 class="h2">Things I've built</h2>
+        <p class="sub">Mostly where data, LLMs and market structure collide.</p>
+        <div class="grid">
+          <article class="card wide c1">
+            <h3>TRACK, a portfolio analytics dashboard</h3>
+            <p>Consolidates 34 months of trades from Zerodha and Dhan into one view: XIRR, NAV and TWRR performance
+              tracking, and LTCG/STCG tax bucketing.</p>
+            <div class="tags"><span>Analytics</span><span>XIRR</span><span>TWRR</span><span>Tax</span></div>
+          </article>
+          <article class="card">
+            <h3>NSE filings sentiment bot</h3>
+            <p>Scrapes regulatory filings, classifies their sentiment with an LLM and posts alerts to X automatically.
+            </p>
+            <div class="tags"><span>Selenium</span><span>LangChain</span></div>
+          </article>
+          <article class="card c4">
+            <h3>Local-first GST invoice generator</h3>
+            <p>Invoice generator and register built on Flask and SQLite, with WeasyPrint for PDFs, Decimal-based tax
+              logic and a pytest suite.</p>
+            <div class="tags"><span>Flask</span><span>SQLite</span><span>pytest</span></div>
+          </article>
+          <article class="card">
+            <h3>Source-weighted sentiment for stock event prediction</h3>
+            <p>A two-stage model that learns how much to trust each news source when flagging abnormal market moves.</p>
+            <div class="tags"><span>PyTorch</span><span>NLP</span><span>Research</span><span>In progress</span></div>
+          </article>
+          <article class="card">
+            <h3>Earlier work</h3>
+            <p>A real-time NSE stock dashboard (Top 10 at HackWithIndia 2024) and an LLM annual report KPI extractor.
+            </p>
+            <div class="tags"><span>Python</span><span>Flask</span><span>LLM</span></div>
+          </article>
+          <article class="card full">
+            <h3>Bagranj, a global macro tracker <span class="live"><i></i>In progress</span></h3>
+            <p>A system for tracking macro signals across markets: liquidity, cycles, flows and key indicators. Still
+              early and messy, but the goal is to make macro more trackable and less abstract.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="experience">
+        <h2 class="h2">Where I've worked</h2>
+        <div class="jobs" style="margin-top:30px">
+          <div class="job">
+            <span class="when">Present</span>
+            <h3>Intern, BookYourMeals</h3>
+            <span class="live"><i></i>Current</span>
+          </div>
+          <div class="job">
+            <span class="when">2025</span>
+            <h3>Research Intern, DRDO</h3>
+            <p>Worked on applied research problems and saw how real systems get tested and built.</p>
+          </div>
+        </div>
+        <p class="certline">Certifications: Google Advanced Data Analytics, DataCamp Machine Learning Scientist, NPTEL
+          Database Management Systems.</p>
+      </section>
+
+      <section id="watching">
+        <h2 class="h2">Macro I track</h2>
+        <div class="notes" style="margin-top:36px">
+          <div class="sticky">
+            <h3>Liquidity</h3>
+            <p>Fed balance sheet and QT, US yield curve steepening. liquidity decides the tide</p>
+          </div>
+          <div class="sticky">
+            <h3>India</h3>
+            <p>RBI transmission, INR drivers, sovereign debt structure. the rupee has opinions</p>
+          </div>
+          <div class="sticky">
+            <h3>Real assets</h3>
+            <p>currency debasement thesis, gold. hard assets for soft money</p>
+          </div>
+        </div>
+        <p class="quote">Trying to understand the system before trying to beat it.</p>
+      </section>
+
+      <section id="quests">
+        <h2 class="h2">Side quests</h2>
+        <div class="quests">
+          <div class="quest">
+            <h3>MeetMind</h3>
+            <p>Meeting intelligence app that transcribes and summarises with Sarvam AI.</p>
+          </div>
+          <div class="quest">
+            <h3>ImpactLink</h3>
+            <p>n8n-based NGO and CSR matchmaking, built for an IBM training project.</p>
+          </div>
+          <div class="quest">
+            <h3>WiFi RSSI sandbox</h3>
+            <p>Signal processing experiments on macOS, for the fun of it.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="contact">
+        <h2 class="h2">Say hi.</h2>
+        <button class="mail" id="mail" type="button" aria-label="Copy email address">ssrihan@zohomail.in <span
+            id="mailState">Copy</span></button>
+        <div class="socials">
+          <a href="mailto:ssrihan@zohomail.in">Email me</a>
+          <a href="https://www.linkedin.com/in/shaashvat-srihan-448150160/" target="_blank"
+            rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://x.com/Srihan_S" target="_blank" rel="noopener noreferrer">X</a>
+          <a href="https://github.com/anshsrihan" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+      </section>
     </div>
+  </main>
 
-    <section id="about">
-      <div class="about">
-        <div>
-          <h2 class="h2">A bit about me</h2>
-          <p>I work where data, markets and software meet. Python and PyTorch for research, Flask, SQL and Next.js for shipping.</p>
-          <p>I manage my own portfolio with a macro lens, and I'd rather understand why something moves than react to it.</p>
-        </div>
-        <div class="tools" aria-label="Tools I use">
-          <span>Python</span><span>SQL</span><span>PyTorch</span><span>scikit-learn</span><span>Pandas</span><span>Flask</span><span>LangChain</span><span>Selenium</span><span>yfinance</span><span>Next.js</span><span>FinBERT</span><span>Supabase</span>
-        </div>
-      </div>
-    </section>
+  <footer>
+    <div class="wrap">© 2026 Shaashvat · Delhi-NCR</div>
+  </footer>
 
-    <section id="work">
-      <h2 class="h2">Things I've built</h2>
-      <p class="sub">Mostly where data, LLMs and market structure collide.</p>
-      <div class="grid">
-        <article class="card wide c1">
-          <h3>TRACK, a portfolio analytics dashboard</h3>
-          <p>Consolidates 34 months of trades from Zerodha and Dhan into one view: XIRR, NAV and TWRR performance tracking, and LTCG/STCG tax bucketing.</p>
-          <div class="tags"><span>Analytics</span><span>XIRR</span><span>TWRR</span><span>Tax</span></div>
-        </article>
-        <article class="card">
-          <h3>NSE filings sentiment bot</h3>
-          <p>Scrapes regulatory filings, classifies their sentiment with an LLM and posts alerts to X automatically.</p>
-          <div class="tags"><span>Selenium</span><span>LangChain</span></div>
-        </article>
-        <article class="card c4">
-          <h3>Local-first GST invoice generator</h3>
-          <p>Invoice generator and register built on Flask and SQLite, with WeasyPrint for PDFs, Decimal-based tax logic and a pytest suite.</p>
-          <div class="tags"><span>Flask</span><span>SQLite</span><span>pytest</span></div>
-        </article>
-        <article class="card">
-          <h3>Source-weighted sentiment for stock event prediction</h3>
-          <p>A two-stage model that learns how much to trust each news source when flagging abnormal market moves.</p>
-          <div class="tags"><span>PyTorch</span><span>NLP</span><span>Research</span><span>In progress</span></div>
-        </article>
-        <article class="card">
-          <h3>Earlier work</h3>
-          <p>A real-time NSE stock dashboard (Top 10 at HackWithIndia 2024) and an LLM annual report KPI extractor.</p>
-          <div class="tags"><span>Python</span><span>Flask</span><span>LLM</span></div>
-        </article>
-        <article class="card full">
-          <h3>Bagranj, a global macro tracker <span class="live"><i></i>In progress</span></h3>
-          <p>A system for tracking macro signals across markets: liquidity, cycles, flows and key indicators. Still early and messy, but the goal is to make macro more trackable and less abstract.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="experience">
-      <h2 class="h2">Where I've worked</h2>
-      <div class="jobs" style="margin-top:30px">
-        <div class="job">
-          <span class="when">Present</span>
-          <h3>Intern, BookYourMeals</h3>
-          <span class="live"><i></i>Current</span>
-        </div>
-        <div class="job">
-          <span class="when">2025</span>
-          <h3>Research Intern, DRDO</h3>
-          <p>Worked on applied research problems and saw how real systems get tested and built.</p>
-        </div>
-      </div>
-      <p class="certline">Certifications: Google Advanced Data Analytics, DataCamp Machine Learning Scientist, NPTEL Database Management Systems.</p>
-    </section>
-
-    <section id="watching">
-      <h2 class="h2">Macro I track</h2>
-      <div class="notes" style="margin-top:36px">
-        <div class="sticky"><h3>Liquidity</h3><p>Fed balance sheet and QT, US yield curve steepening. liquidity decides the tide</p></div>
-        <div class="sticky"><h3>India</h3><p>RBI transmission, INR drivers, sovereign debt structure. the rupee has opinions</p></div>
-        <div class="sticky"><h3>Real assets</h3><p>currency debasement thesis, gold. hard assets for soft money</p></div>
-      </div>
-      <p class="quote">Trying to understand the system before trying to beat it.</p>
-    </section>
-
-    <section id="quests">
-      <h2 class="h2">Side quests</h2>
-      <div class="quests">
-        <div class="quest"><h3>MeetMind</h3><p>Meeting intelligence app that transcribes and summarises with Sarvam AI.</p></div>
-        <div class="quest"><h3>ImpactLink</h3><p>n8n-based NGO and CSR matchmaking, built for an IBM training project.</p></div>
-        <div class="quest"><h3>WiFi RSSI sandbox</h3><p>Signal processing experiments on macOS, for the fun of it.</p></div>
-      </div>
-    </section>
-
-    <section id="contact" class="contact">
-      <h2 class="h2">Say hi.</h2>
-      <button class="mail" id="mail" type="button" aria-label="Copy email address">ssrihan@zohomail.in <span id="mailState">Copy</span></button>
-      <div class="socials">
-        <a href="mailto:ssrihan@zohomail.in">Email me</a>
-        <a href="https://www.linkedin.com/in/shaashvat-srihan-448150160/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://x.com/Srihan_S" target="_blank" rel="noopener noreferrer">X</a>
-        <a href="https://github.com/anshsrihan" target="_blank" rel="noopener noreferrer">GitHub</a>
-      </div>
-    </section>
-  </div>
-</main>
-
-<footer><div class="wrap">© 2026 Shaashvat · Delhi-NCR</div></footer>
-
-<script>
-  // Live Delhi clock
-  (function () {
-    var el = document.getElementById('clock');
-    var fmt = new Intl.DateTimeFormat('en-IN', { timeZone: 'Asia/Kolkata', hour: 'numeric', minute: '2-digit', second: '2-digit', hour12: true });
-    function tick() { el.textContent = 'Delhi ' + fmt.format(new Date()); }
-    tick(); setInterval(tick, 1000);
-  })();
-  // Copy email
-  (function () {
-    var btn = document.getElementById('mail'), state = document.getElementById('mailState'), t;
-    btn.addEventListener('click', function () {
-      var done = function (msg) { state.textContent = msg; clearTimeout(t); t = setTimeout(function () { state.textContent = 'Copy'; }, 1800); };
-      if (navigator.clipboard) { navigator.clipboard.writeText('ssrihan@zohomail.in').then(function () { done('Copied'); }, function () { done('Use Email'); }); }
-      else { done('Use Email'); }
-    });
-  })();
-</script>
+  <script>
+    // Live Delhi clock
+    (function () {
+      var el = document.getElementById('clock');
+      var fmt = new Intl.DateTimeFormat('en-IN', { timeZone: 'Asia/Kolkata', hour: 'numeric', minute: '2-digit', second: '2-digit', hour12: true });
+      function tick() { el.textContent = 'Delhi ' + fmt.format(new Date()); }
+      tick(); setInterval(tick, 1000);
+    })();
+    // Copy email
+    (function () {
+      var btn = document.getElementById('mail'), state = document.getElementById('mailState'), t;
+      btn.addEventListener('click', function () {
+        var done = function (msg) { state.textContent = msg; clearTimeout(t); t = setTimeout(function () { state.textContent = 'Copy'; }, 1800); };
+        if (navigator.clipboard) { navigator.clipboard.writeText('ssrihan@zohomail.in').then(function () { done('Copied'); }, function () { done('Use Email'); }); }
+        else { done('Use Email'); }
+      });
+    })();
+  </script>
 </body>
+
 </html>
